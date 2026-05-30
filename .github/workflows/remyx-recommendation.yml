@@ -1,0 +1,19 @@
+name: Remyx Recommendation
+on:
+  workflow_dispatch:
+jobs:
+  recommend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    env:
+      REMYX_API_KEY: ${{ secrets.REMYX_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: remyxai/remyx-recommendation-action@fix/eval-findings-remyx-62
+        with:
+          interest-id: fd1d49eb-aeb0-4cc8-901e-41938c38f4cb
+          rate-limit-days: 0
