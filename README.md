@@ -472,3 +472,25 @@ We are motivated to constantly make PyG even better.
 [pypi-url]: https://pypi.python.org/pypi/torch-geometric
 [slack-image]: https://img.shields.io/badge/slack-join-white.svg?logo=slack&color=4B26A4
 [slack-url]: https://data.pyg.org/slack.html
+
+## Uniform Random Node Sampling (RNS) — adapted from "Implicit Regularization of Mini-Batch Training in Graph Neural Networks"
+
+`RandomNodeLoader` now accepts a `sampling` argument. The default `"partition"`
+mode preserves the historical behavior (a shuffled permutation split into
+`num_parts` chunks, each node seen once per epoch). The new `"uniform"` mode
+realizes **Random Node Sampling (RNS)**: every mini-batch is an independent,
+i.i.d. uniform draw of nodes whose induced subgraph is returned.
+
+```python
+from torch_geometric.loader import RandomNodeLoader
+
+loader = RandomNodeLoader(data, num_parts=10, sampling='uniform')
+```
+
+Following [*Implicit Regularization of Mini-Batch Training in Graph Neural
+Networks*](https://arxiv.org/abs/2605.22480v1), RNS produces mini-batches whose
+expected loss is closer to the full-graph loss and whose per-batch gradients
+have lower variance, acting as an implicit regularizer for scalable GNN
+training. The underlying scheme is exposed as `UniformNodeSampler`.
+
+Contributed via [Remyx Recommendation](https://engine.remyx.ai).
