@@ -11,6 +11,7 @@ from .graph_saint import (GraphSAINTSampler, GraphSAINTNodeSampler,
                           GraphSAINTEdgeSampler, GraphSAINTRandomWalkSampler)
 from .shadow import ShaDowKHopSampler
 from .random_node_loader import RandomNodeLoader
+from .random_node_sampling import UniformNodeSampler
 # from .ibmb_loader import IBMBBatchLoader, IBMBNodeLoader
 from .zip_loader import ZipLoader
 from .data_list_loader import DataListLoader
@@ -38,6 +39,7 @@ __all__ = classes = [
     'GraphSAINTRandomWalkSampler',
     'ShaDowKHopSampler',
     'RandomNodeLoader',
+    'UniformNodeSampler',
     # 'IBMBBatchLoader',
     # 'IBMBNodeLoader',
     'ZipLoader',
